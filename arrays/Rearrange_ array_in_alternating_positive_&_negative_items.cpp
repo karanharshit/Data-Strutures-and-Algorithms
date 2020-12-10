@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
-	int n;
-	cin>>n;
+    int n;
+    cin>>n;
     int array[n];
     int negative=0;
     int positive=0;
