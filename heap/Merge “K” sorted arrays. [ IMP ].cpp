@@ -1,20 +1,30 @@
 class Solution
 {
     public:
+    // typedef pair<int, int> pi;
     //Function to merge k sorted arrays.
     vector<int> mergeKArrays(vector<vector<int>> arr, int K)
     {
-        priority_queue <int, vector<int>, greater<int> > pq;
+        priority_queue<pair<int, int>, vector<pair<int,int>>, greater<pair<int,int>> > pq;
+
+        int index[K];
         for(int i=0;i<K;i++){
-            for(int j=0;j<K;j++){
-                // cout<<arr[i][j]<<"haha"<<i<<" "<<j<<endl;
-                pq.push(arr[i][j]);
-            }
+            index[i]=1;
         }
+        for(int i=0;i<K;i++){
+            pq.push({arr[i][0],i});
+        }
+        
         vector<int> ans;
         while(!pq.empty()){
-            ans.push_back(pq.top());
+            int i=pq.top().second;
+            ans.push_back(pq.top().first);
+
             pq.pop();
+            if(index[i]<K){
+                pq.push({arr[i][index[i]],i});
+                index[i]++;
+            }
         }
         return ans;
     }
